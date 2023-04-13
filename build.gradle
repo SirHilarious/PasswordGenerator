@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
 }
 
 group = 'dev.lockbox'
@@ -11,17 +10,10 @@ repositories {
 }
 
 dependencies {
-
-    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.9.2'
-
-    // https://mvnrepository.com/artifact/org.openjfx/javafx
-    implementation group: 'org.openjfx', name: 'javafx', version: '11', ext: 'pom'
-
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 test {
     useJUnitPlatform()
 }
-
-mainClassName = 'dev.lockbox.Main'

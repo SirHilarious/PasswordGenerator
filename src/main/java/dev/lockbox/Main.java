@@ -1,23 +1,15 @@
 package dev.lockbox;
 
-/**
- * The type Main.
- */
+import dev.lockbox.screen.PasswordGUI;
+
 public class Main {
-    /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
-     */
+    public static final int MIN_PASSWORD_LENGTH = 4;
+    public static final int MAX_PASSWORD_LENGTH = 100;
+    public static String LAST_PASSWORD = "";
+
     public static void main(String[] args) {
-        System.out.println("Starting LockBox Password Generator...");
-
-        System.out.println("Loading the Password Generator GUI...");
-        // TODO: Start the GUI
-        System.out.println("Finished loading the Password Generator GUI.");
-
-        System.out.println("Starting the Password Generator...");
-        // TODO: Start the Password Generator
-        System.out.println("Finished starting the Password Generator.");
+        System.out.println("Starting the Configuration GUI...");
+        PasswordGUI.main(args);
+        System.out.println("Finished loading the Configuration GUI");
     }
 }
