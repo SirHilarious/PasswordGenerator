@@ -16,36 +16,50 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.util.Objects;
 
+import static dev.lockbox.generator.PasswordGenerator.lastPassword;
+
+/**
+ * The type Password gui.
+ */
 public class PasswordGUI extends Application {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        // Load the FXML file for the password configuration GUI
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/PasswordGUI.fxml")));
-        primaryStage.setTitle("Password Configuration GUI");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
-        primaryStage.setResizable(false);
 
+        // Set the title for the primary stage
+        primaryStage.setTitle("Password Configuration GUI");
+
+        // Set the scene for the primary stage
+        primaryStage.setScene(new Scene(root));
+
+        // Display the primary stage
+        primaryStage.show();
+
+        // Disable the ability to resize the primary stage
+        primaryStage.setResizable(false);
         Button generateButton = (Button) root.lookup("#generateButton");
         generateButton.setOnAction(event -> {
-            // Get the user inputs
             CheckBox specialCharactersCheckBox = (CheckBox) root.lookup("#specialBox");
             TextField lengthInput = (TextField) root.lookup("#lengthInput");
             int length = Integer.parseInt(lengthInput.getText());
             boolean useSpecialCharacters = specialCharactersCheckBox.isSelected();
-
-            // Generate the password
             try {
                 String password = PasswordGenerator.generatePassword(length, useSpecialCharacters);
-                PasswordGenerator.setLastPassword(password); // store the generated password
-
-                // Display the generated password in the passwordBox field
+                PasswordGenerator.setLastPassword(password);
                 TextField passwordBox = (TextField) root.lookup("#passwordBox");
                 passwordBox.setText(password);
             } catch (IllegalArgumentException e) {
+                ErrorScreen.launch();
                 System.out.println("Failed to generate password: " + e.getMessage());
                 e.printStackTrace();
                 throw new IllegalArgumentException("Failed to generate password: " + e.getMessage());
@@ -54,14 +68,13 @@ public class PasswordGUI extends Application {
 
         Button cancelButton = (Button) root.lookup("#cancelButton");
         cancelButton.setOnAction(event -> {
-            // Close the window
             primaryStage.close();
             System.exit(0);
         });
 
         Button copyButton = (Button) root.lookup("#copyButton");
         copyButton.setOnAction(event -> {
-            StringSelection stringSelection = new StringSelection(Main.LAST_PASSWORD);
+            StringSelection stringSelection = new StringSelection(lastPassword);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(stringSelection, null);
 
@@ -96,7 +109,7 @@ public class PasswordGUI extends Application {
                     throw new IllegalArgumentException("Length must be less than or equal to " + Main.MAX_PASSWORD_LENGTH);
                 }
 
-                lengthInput.setStyle(""); // reset border color
+                lengthInput.setStyle("");
             } else {
                 System.out.println("Please enter a number");
                 lengthInput.setStyle("-fx-border-color: red ; -fx-border-width: 2px ; -fx-border-radius: 5px ;");

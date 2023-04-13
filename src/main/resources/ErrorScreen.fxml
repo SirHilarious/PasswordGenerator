@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0"
+      prefWidth="342.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="error">
+   <Button fx:id="okayButton" layoutY="312.0" mnemonicParsing="false" text="Okay">
+      <tooltip>
+         <Tooltip text="Click this Button to exit this Window."/>
+      </tooltip>
+   </Button>
+   <TextArea fx:id="errorBox" editable="false" layoutX="24.0" layoutY="46.0" prefHeight="238.0" prefWidth="295.0" wrapText="true">
+      <tooltip>
+         <Tooltip text="The Error Message is displayed in this Text Box."/>
+      </tooltip>
+   </TextArea>
+</Pane>
