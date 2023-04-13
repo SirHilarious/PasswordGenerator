@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'dev.lockbox'
+version = '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.9.2'
+
+    // https://mvnrepository.com/artifact/org.openjfx/javafx
+    implementation group: 'org.openjfx', name: 'javafx', version: '11', ext: 'pom'
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+mainClassName = 'dev.lockbox.Main'
